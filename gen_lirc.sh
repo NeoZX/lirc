@@ -1,7 +1,21 @@
 #!/bin/bash
 
-BRAND=SAMSUNG
-DEV_NAME=DB-11115K
+
+if [ -z "$2" ]
+then
+	echo "Usage: $0 <BRAND> <DEVICE_NAME>"
+	exit 1
+else
+	BRAND=$1
+	DEV_NAME=$2
+fi
+
+if [ -z "$3" ]
+then
+	GAP=8908
+else
+	GAP=$3
+fi
 
 #Header
 echo 'begin remote' >${BRAND}.${DEV_NAME}.lircd.conf
@@ -11,7 +25,7 @@ echo '  flags RAW_CODES' >>${BRAND}.${DEV_NAME}.lircd.conf
 echo '  eps            30' >>${BRAND}.${DEV_NAME}.lircd.conf
 echo '  aeps          100' >>${BRAND}.${DEV_NAME}.lircd.conf
 echo '' >>${BRAND}.${DEV_NAME}.lircd.conf
-echo '  gap          8908' >>${BRAND}.${DEV_NAME}.lircd.conf
+echo "  gap          $GAP" >>${BRAND}.${DEV_NAME}.lircd.conf
 echo '' >>${BRAND}.${DEV_NAME}.lircd.conf
 echo -e '	begin raw_codes' >>${BRAND}.${DEV_NAME}.lircd.conf
 
